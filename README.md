@@ -1,2 +1,4 @@
-# CheckDev.ru
-Публичный репозиторий для проекта CheckDev.ru
+![CI GitHubAction](https://github.com/peterarsentev/CheckDev/actions/workflows/maven.yml/badge.svg)
+
+
+CheckDev - пробные собеседования в IT
