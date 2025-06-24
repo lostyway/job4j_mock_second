@@ -38,11 +38,11 @@ class TgAuthCallWebClintTest {
     @Mock
     private WebClient.ResponseSpec responseMock;
 
-    private TgAuthCallWebClint tgAuthCallWebClint;
+    private TgAuthCallWebClient tgAuthCallWebClint;
 
     @BeforeEach
     void setUp() {
-        tgAuthCallWebClint = new TgAuthCallWebClint(URL);
+        tgAuthCallWebClint = new TgAuthCallWebClient(URL);
         tgAuthCallWebClint.setWebClient(webClientMock);
     }
 
