@@ -1,7 +1,9 @@
 package ru.checkdev.notification.telegram;
 
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.checkdev.notification.telegram.action.Action;
@@ -16,6 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Dmitry Stepanov, user Dmitry
  * @since 12.09.2023
  */
+
+@Slf4j
 public class BotMenu extends TelegramLongPollingBot {
     private final Map<String, String> bindingBy = new ConcurrentHashMap<>();
     private final Map<String, Action> actions;
@@ -52,15 +56,25 @@ public class BotMenu extends TelegramLongPollingBot {
                 var msg = actions.get(bindingBy.get(chatId)).callback(update.getMessage());
                 bindingBy.remove(chatId);
                 send(msg);
+            } else {
+                sendInfoThatCommandIsUnsupported(chatId);
             }
         }
     }
 
-    private void send(BotApiMethod msg) {
+    private void sendInfoThatCommandIsUnsupported(String chatId) {
+        String text = "Команда не поддерживается! Список доступных команд: /start";
+        SendMessage msg = new SendMessage();
+        msg.setChatId(chatId);
+        msg.setText(text);
+        send(msg);
+    }
+
+    private void send(BotApiMethod<?> msg) {
         try {
             execute(msg);
         } catch (TelegramApiException e) {
-            e.printStackTrace();
+            log.warn("Ошибка в методе send при отправке");
         }
     }
 }
