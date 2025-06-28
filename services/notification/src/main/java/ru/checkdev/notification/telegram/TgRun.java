@@ -43,7 +43,7 @@ public class TgRun {
     public void initTg() {
         Map<String, Action> actionMap = Map.of(
                 "/start", new InfoAction(List.of(
-                        "/start", "/new")),
+                        "/start", "/new", "/check", "/bind", "/unbind")),
                 "/new", new RegAction(tgAuthCallWebClint, urlSiteAuth)
         );
         try {
