@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import ru.checkdev.notification.telegram.action.Action;
+import ru.checkdev.notification.telegram.action.CheckAction;
 import ru.checkdev.notification.telegram.action.InfoAction;
 import ru.checkdev.notification.telegram.action.RegAction;
 import ru.checkdev.notification.telegram.service.TgAuthCallWebClient;
@@ -44,7 +45,8 @@ public class TgRun {
         Map<String, Action> actionMap = Map.of(
                 "/start", new InfoAction(List.of(
                         "/start", "/new", "/check", "/bind", "/unbind")),
-                "/new", new RegAction(tgAuthCallWebClint, urlSiteAuth)
+                "/new", new RegAction(tgAuthCallWebClint, urlSiteAuth),
+                "/check", new CheckAction(tgAuthCallWebClint, urlSiteAuth)
         );
         try {
             BotMenu menu = new BotMenu(actionMap, username, token);

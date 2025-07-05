@@ -16,6 +16,7 @@ import ru.checkdev.auth.service.RoleService;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;

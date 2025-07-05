@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.beans.factory.annotation.Value;
 import reactor.core.publisher.Mono;
 import ru.checkdev.notification.domain.PersonDTO;
+import ru.checkdev.notification.domain.UserInfo;
 
 @Service
 @Slf4j
@@ -68,5 +69,13 @@ public class TgAuthCallWebClient {
     public Mono<Object> fallbackPost(String url, PersonDTO personDTO, Throwable throwable) {
         log.error("POST request failed, fallback triggered: {}", throwable.getMessage());
         return Mono.empty(); // Или возвращайте какой-то запасной ответ
+    }
+
+    public UserInfo getUserInfoChatId(String chatId) {
+        return webClient.get()
+                .uri("/api/telegram/user-info?chatId=" + chatId)
+                .retrieve()
+                .bodyToMono(UserInfo.class)
+                .block();
     }
 }

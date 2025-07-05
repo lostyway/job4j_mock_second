@@ -35,6 +35,7 @@ import javax.imageio.stream.ImageOutputStream;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyDescriptor;
 import java.io.ByteArrayOutputStream;
+import java.nio.channels.FileChannel;
 import java.util.*;
 
 /**
@@ -309,5 +310,9 @@ public class PersonService {
         }
         emptyNames.addAll(Arrays.asList(extra));
         return emptyNames;
+    }
+
+    public FileChannel findUserByChatId(String chatId) {
+        return null;
     }
 }
